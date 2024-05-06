@@ -1,4 +1,4 @@
-package com.example.semesterwork;
+package com.example.semesterwork.util;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

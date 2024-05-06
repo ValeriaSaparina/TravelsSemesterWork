@@ -3,6 +3,7 @@ package com.example.semesterwork.config;
 import com.example.semesterwork.routes.mapper.RouteMapper;
 import com.example.semesterwork.user.mapper.UserMapper;
 import com.example.semesterwork.user.repo.UserRepo;
+import com.example.semesterwork.util.MissingServletRequestParameterExceptionHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -53,5 +54,10 @@ public class ApplicationConfig {
     @Bean
     public RouteMapper routeMapper() {
         return new RouteMapper();
+    }
+
+    @Bean
+    public MissingServletRequestParameterExceptionHandler missingServletRequestParameterExceptionHandler() {
+        return new MissingServletRequestParameterExceptionHandler();
     }
 }

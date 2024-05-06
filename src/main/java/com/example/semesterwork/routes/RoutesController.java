@@ -1,10 +1,10 @@
 package com.example.semesterwork.routes;
 
 
-import com.example.semesterwork.GeneralResponse;
 import com.example.semesterwork.routes.dto.RouteDto;
 import com.example.semesterwork.routes.model.RouteRequest;
 import com.example.semesterwork.routes.service.RouteService;
+import com.example.semesterwork.util.GeneralResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -5,7 +5,6 @@ import com.example.semesterwork.routes.mapper.RouteMapper;
 import com.example.semesterwork.routes.model.RouteRequest;
 import com.example.semesterwork.routes.repository.RouteRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.val;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
