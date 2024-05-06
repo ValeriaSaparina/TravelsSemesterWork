@@ -1,5 +1,6 @@
 package com.example.semesterwork.config;
 
+import com.example.semesterwork.places.mapper.PlaceMapper;
 import com.example.semesterwork.routes.mapper.RouteMapper;
 import com.example.semesterwork.user.mapper.UserMapper;
 import com.example.semesterwork.user.repo.UserRepo;
@@ -59,5 +60,10 @@ public class ApplicationConfig {
     @Bean
     public MissingServletRequestParameterExceptionHandler missingServletRequestParameterExceptionHandler() {
         return new MissingServletRequestParameterExceptionHandler();
+    }
+
+    @Bean
+    public PlaceMapper placeMapper() {
+        return new PlaceMapper();
     }
 }
