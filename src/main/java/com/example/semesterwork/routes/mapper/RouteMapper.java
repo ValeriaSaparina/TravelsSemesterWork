@@ -1,6 +1,5 @@
 package com.example.semesterwork.routes.mapper;
 
-import com.example.semesterwork.places.model.PlaceModel;
 import com.example.semesterwork.routes.dto.RouteDto;
 import com.example.semesterwork.routes.model.RouteModel;
 

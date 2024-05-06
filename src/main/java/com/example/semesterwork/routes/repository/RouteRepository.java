@@ -1,6 +1,5 @@
 package com.example.semesterwork.routes.repository;
 
-import com.example.semesterwork.places.model.PlaceModel;
 import com.example.semesterwork.routes.model.RouteModel;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

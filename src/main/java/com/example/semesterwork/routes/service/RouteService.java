@@ -1,7 +1,5 @@
 package com.example.semesterwork.routes.service;
 
-import com.example.semesterwork.places.dto.PlaceDto;
-import com.example.semesterwork.places.mapper.PlaceMapper;
 import com.example.semesterwork.routes.dto.RouteDto;
 import com.example.semesterwork.routes.mapper.RouteMapper;
 import com.example.semesterwork.routes.repository.RouteRepository;

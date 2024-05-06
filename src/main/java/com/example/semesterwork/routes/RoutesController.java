@@ -1,7 +1,6 @@
 package com.example.semesterwork.routes;
 
 
-import com.example.semesterwork.places.dto.PlaceDto;
 import com.example.semesterwork.routes.dto.RouteDto;
 import com.example.semesterwork.routes.service.RouteService;
 import lombok.RequiredArgsConstructor;
