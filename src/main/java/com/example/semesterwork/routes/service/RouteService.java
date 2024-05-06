@@ -2,8 +2,10 @@ package com.example.semesterwork.routes.service;
 
 import com.example.semesterwork.routes.dto.RouteDto;
 import com.example.semesterwork.routes.mapper.RouteMapper;
+import com.example.semesterwork.routes.model.RouteRequest;
 import com.example.semesterwork.routes.repository.RouteRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.val;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -28,5 +30,9 @@ public class RouteService {
     public List<RouteDto> findByQuery(String query, Integer pageNumber, Integer pageSize) {
         return repository.findByQuery(query, PageRequest.of(pageNumber, pageSize)).orElseThrow()
                 .stream().map(mapper::toDto).collect(Collectors.toList());
+    }
+
+    public void createRoute(RouteRequest routeRequest) {
+        repository.save(mapper.toEntity(routeRequest));
     }
 }
