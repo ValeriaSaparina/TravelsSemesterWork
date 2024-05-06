@@ -30,6 +30,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(req -> req
                                 .requestMatchers("/api/v1/auth/**").permitAll()
                                 .requestMatchers("/api/v1/demo").permitAll()
+                                .requestMatchers("/api/v1/places/**").permitAll()
+                                .requestMatchers("/api/v1/routes/**").permitAll()
                                 .requestMatchers("/api/v1/admin/**").hasAnyAuthority("ROLE_ADMIN")
 //                        .requestMatchers("/api/v1/demo").authenticated()
 
