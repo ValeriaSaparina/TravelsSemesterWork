@@ -1,25 +1,20 @@
 package com.example.semesterwork.auth;
 
-import com.example.semesterwork.user.model.MyUser;
-import com.example.semesterwork.user.model.Role;
-import com.example.semesterwork.token.Token;
-import com.example.semesterwork.user.repo.RoleRepo;
-import com.example.semesterwork.user.repo.UserRepo;
 import com.example.semesterwork.service.JwtService;
+import com.example.semesterwork.token.Token;
 import com.example.semesterwork.token.TokenRepo;
 import com.example.semesterwork.token.TokenType;
+import com.example.semesterwork.user.model.MyUser;
+import com.example.semesterwork.user.repo.RoleRepo;
+import com.example.semesterwork.user.repo.UserRepo;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import lombok.val;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -110,7 +105,7 @@ public class AuthenticationService {
         final String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
         final String refreshToken;
         final String userEmail;
-        if (authHeader == null ||!authHeader.startsWith("Bearer ")) {
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             return;
         }
         refreshToken = authHeader.substring(7);
