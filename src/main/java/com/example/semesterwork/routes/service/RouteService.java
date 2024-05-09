@@ -5,6 +5,8 @@ import com.example.semesterwork.routes.mapper.RouteMapper;
 import com.example.semesterwork.routes.model.RouteRequest;
 import com.example.semesterwork.routes.repository.RouteRepository;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class RouteService {
 
+    private static final Logger log = LoggerFactory.getLogger(RouteService.class);
     private final RouteRepository repository;
     private final RouteMapper mapper;
 
@@ -23,6 +26,7 @@ public class RouteService {
     }
 
     public List<RouteDto> findAll() {
+        log.info(String.valueOf(repository.findAll()));
         return repository.findAll().stream().map(mapper::toDto).collect(Collectors.toList());
     }
 
@@ -37,5 +41,9 @@ public class RouteService {
 
     public void addFavRoute(Long routeId) {
 //        repository.
+    }
+
+    public List<RouteDto> findByQuery(String query) {
+        return repository.findByQuery(query).orElseThrow().stream().map(mapper::toDto).collect(Collectors.toList());
     }
 }

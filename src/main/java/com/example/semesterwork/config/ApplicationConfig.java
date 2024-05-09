@@ -57,7 +57,7 @@ public class ApplicationConfig {
 
     @Bean
     public RouteMapper routeMapper() {
-        return new RouteMapper();
+        return new RouteMapper(placeMapper());
     }
 
     @Bean

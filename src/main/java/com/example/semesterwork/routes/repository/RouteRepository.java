@@ -15,4 +15,10 @@ public interface RouteRepository extends JpaRepository<RouteModel, Long> {
             where lower(name) LIKE lower(concat('%', :query, '%'))
             """, nativeQuery = true)
     Optional<List<RouteModel>> findByQuery(String query, Pageable pageable);
+
+    @Query(value = """
+            select * from routes
+            where lower(name) LIKE lower(concat('%', :query, '%'))
+            """, nativeQuery = true)
+    Optional<List<RouteModel>> findByQuery(String query);
 }

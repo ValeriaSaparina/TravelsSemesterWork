@@ -30,14 +30,23 @@ public class RoutesController {
         return ResponseEntity.ok(routeService.findById(id));
     }
 
-    @RequestMapping(value = "/routes", method = RequestMethod.GET)
-    public ResponseEntity<List<RouteDto>> getPlaceByQuery(
+    @RequestMapping(value = "/routesWithPage", method = RequestMethod.GET)
+    public ResponseEntity<List<RouteDto>> getPlaceByQueryPage(
             @RequestParam("query") String query,
             @RequestParam("pageSize") Integer pageSize,
             @RequestParam("pageNumber") Integer pageNumber
     ) {
         return ResponseEntity.ok(routeService.findByQuery(query, pageNumber, pageSize));
     }
+
+
+    @RequestMapping(value = "/routes", method = RequestMethod.GET)
+    public ResponseEntity<List<RouteDto>> getPlaceByQuery(
+            @RequestParam("query") String query
+    ) {
+        return ResponseEntity.ok(routeService.findByQuery(query));
+    }
+
 
     @RequestMapping(value = "/addFavRoute", method = RequestMethod.POST)
     public ResponseEntity<GeneralResponse> addFavRoute(@RequestBody Long routeId) {

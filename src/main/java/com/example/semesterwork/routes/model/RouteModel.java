@@ -1,13 +1,13 @@
 package com.example.semesterwork.routes.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.example.semesterwork.places.model.PlaceModel;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.Set;
 
 @Entity(name = "routes")
 @Data
@@ -18,9 +18,7 @@ public class RouteModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String type;
     private String name;
-    private String description;
-    private String address;
-    // TODO: Route model
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<PlaceModel> places;
 }
