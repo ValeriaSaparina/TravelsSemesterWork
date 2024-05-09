@@ -1,11 +1,11 @@
 package com.example.semesterwork.user.mapper;
 
 import com.example.semesterwork.user.dto.UserDto;
-import com.example.semesterwork.user.model.MyUser;
+import com.example.semesterwork.user.model.UserModel;
 
 public class UserMapper {
 
-    public UserDto entityToDto(MyUser user) {
+    public UserDto entityToDto(UserModel user) {
         return UserDto
                 .builder()
                 .id(user.getId())

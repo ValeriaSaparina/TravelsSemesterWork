@@ -1,6 +1,8 @@
 package com.example.semesterwork.config;
 
 import com.example.semesterwork.places.mapper.PlaceMapper;
+import com.example.semesterwork.places.mapper.ReviewPlaceMapper;
+import com.example.semesterwork.places.repository.PlaceRepository;
 import com.example.semesterwork.routes.mapper.RouteMapper;
 import com.example.semesterwork.user.mapper.UserMapper;
 import com.example.semesterwork.user.repo.UserRepo;
@@ -22,6 +24,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class ApplicationConfig {
 
     private final UserRepo userRepo;
+    private final PlaceRepository placeRepo;
 
     @Bean
     public UserDetailsService userDetailsService() {
@@ -58,12 +61,23 @@ public class ApplicationConfig {
     }
 
     @Bean
-    public MissingServletRequestParameterExceptionHandler missingServletRequestParameterExceptionHandler() {
-        return new MissingServletRequestParameterExceptionHandler();
+    public ReviewPlaceMapper reviewPlaceMapper() {
+        return new ReviewPlaceMapper(
+                placeRepo,
+                userRepo,
+                userMapper(),
+                placeMapper()
+        );
     }
+
 
     @Bean
     public PlaceMapper placeMapper() {
         return new PlaceMapper();
+    }
+
+    @Bean
+    public MissingServletRequestParameterExceptionHandler missingServletRequestParameterExceptionHandler() {
+        return new MissingServletRequestParameterExceptionHandler();
     }
 }

@@ -39,6 +39,22 @@ public class RoutesController {
         return ResponseEntity.ok(routeService.findByQuery(query, pageNumber, pageSize));
     }
 
+    @RequestMapping(value = "/addFavRoute", method = RequestMethod.POST)
+    public ResponseEntity<GeneralResponse> addFavRoute(@RequestBody Long routeId) {
+        HttpStatus status;
+        try {
+            routeService.addFavRoute(routeId);
+            status = HttpStatus.CREATED;
+        } catch (Exception e) {
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        GeneralResponse responseBody = GeneralResponse.builder()
+                .code(status.value())
+                .message(status.getReasonPhrase())
+                .build();
+        return ResponseEntity.status(status).body(responseBody);
+    }
+
     @PostMapping("/createRoute")
     public ResponseEntity<GeneralResponse> createRoute(@RequestBody RouteRequest routeRequest) {
         HttpStatus status;

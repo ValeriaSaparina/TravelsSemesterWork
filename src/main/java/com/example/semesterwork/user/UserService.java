@@ -3,7 +3,7 @@ package com.example.semesterwork.user;
 import com.example.semesterwork.admin.BlockRequest;
 import com.example.semesterwork.user.dto.UserDto;
 import com.example.semesterwork.user.mapper.UserMapper;
-import com.example.semesterwork.user.model.MyUser;
+import com.example.semesterwork.user.model.UserModel;
 import com.example.semesterwork.user.repo.UserRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -24,7 +24,7 @@ public class UserService {
 
     public void changePassword(ChangePasswordRequest request, Principal connectedUser) {
 
-        var user = (MyUser) ((UsernamePasswordAuthenticationToken) connectedUser).getPrincipal();
+        var user = (UserModel) ((UsernamePasswordAuthenticationToken) connectedUser).getPrincipal();
 
         if (!passwordEncoder.matches(request.getCurrentPassword(), user.getPassword())) {
             throw new IllegalStateException("Wrong password");
@@ -43,9 +43,9 @@ public class UserService {
     }
 
     public UserDto updBlockUser(BlockRequest request) {
-        MyUser myUser = userRepo.findByEmail(request.getEmail()).orElseThrow();
-        myUser.setIsBlocked(request.getIsBlocked());
-        userRepo.save(myUser);
-        return userMapper.entityToDto(myUser);
+        UserModel userModel = userRepo.findByEmail(request.getEmail()).orElseThrow();
+        userModel.setIsBlocked(request.getIsBlocked());
+        userRepo.save(userModel);
+        return userMapper.entityToDto(userModel);
     }
 }

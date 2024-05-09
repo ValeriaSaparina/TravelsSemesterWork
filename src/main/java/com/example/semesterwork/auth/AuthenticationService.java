@@ -4,7 +4,7 @@ import com.example.semesterwork.service.JwtService;
 import com.example.semesterwork.token.Token;
 import com.example.semesterwork.token.TokenRepo;
 import com.example.semesterwork.token.TokenType;
-import com.example.semesterwork.user.model.MyUser;
+import com.example.semesterwork.user.model.UserModel;
 import com.example.semesterwork.user.repo.RoleRepo;
 import com.example.semesterwork.user.repo.UserRepo;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -34,7 +34,7 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
 
     public AuthenticationResponse register(RegisterRequest request) {
-        var user = MyUser.builder()
+        var user = UserModel.builder()
                 .firstname(request.getFirstname())
                 .lastname(request.getLastname())
                 .email(request.getEmail())
@@ -76,7 +76,7 @@ public class AuthenticationService {
                 .build();
     }
 
-    private void saveUserToken(MyUser user, String jwtToken) {
+    private void saveUserToken(UserModel user, String jwtToken) {
         var token = Token.builder()
                 .user(user)
                 .token(jwtToken)
@@ -87,7 +87,7 @@ public class AuthenticationService {
         tokenRepo.save(token);
     }
 
-    private void revokeAllUserTokens(MyUser user) {
+    private void revokeAllUserTokens(UserModel user) {
         var validUserTokens = tokenRepo.findAllValidTokenByUser(user.getId());
         if (validUserTokens.isEmpty())
             return;

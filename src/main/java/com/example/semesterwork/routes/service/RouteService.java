@@ -34,4 +34,8 @@ public class RouteService {
     public void createRoute(RouteRequest routeRequest) {
         repository.save(mapper.toEntity(routeRequest));
     }
+
+    public void addFavRoute(Long routeId) {
+//        repository.
+    }
 }

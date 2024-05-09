@@ -1,6 +1,6 @@
 package com.example.semesterwork.token;
 
-import com.example.semesterwork.user.model.MyUser;
+import com.example.semesterwork.user.model.UserModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,5 +26,5 @@ public class Token {
     public boolean expired;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    public MyUser user;
+    public UserModel user;
 }

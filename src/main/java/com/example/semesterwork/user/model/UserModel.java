@@ -17,12 +17,12 @@ import java.util.List;
 import static jakarta.persistence.FetchType.EAGER;
 import static jakarta.persistence.GenerationType.AUTO;
 
-@Entity
+@Entity(name = "users")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class MyUser implements UserDetails {
+public class UserModel implements UserDetails {
     @Id
     @GeneratedValue(strategy = AUTO)
     private Long id;

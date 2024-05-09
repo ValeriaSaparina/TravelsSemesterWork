@@ -15,4 +15,14 @@ public class PlaceMapper {
                 .build();
     }
 
+    public PlaceModel toEntity(PlaceDto dto) {
+        return PlaceModel.builder()
+                .id(dto.getId())
+                .name(dto.getName())
+                .type(dto.getType())
+                .address(dto.getAddress())
+                .description(dto.getDescription())
+                .build();
+    }
+
 }
