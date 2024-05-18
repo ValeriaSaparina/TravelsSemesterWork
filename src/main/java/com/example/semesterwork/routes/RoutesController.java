@@ -79,6 +79,5 @@ public class RoutesController {
                 .build();
         return ResponseEntity.status(status).body(responseBody);
     }
-    // TODO: findByType;
 
 }

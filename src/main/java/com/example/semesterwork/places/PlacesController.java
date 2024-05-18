@@ -2,10 +2,11 @@ package com.example.semesterwork.places;
 
 
 import com.example.semesterwork.places.dto.PlaceDto;
+import com.example.semesterwork.places.dto.ReviewPlaceDto;
+import com.example.semesterwork.places.model.ReviewPlaceModel;
 import com.example.semesterwork.places.request.ReviewPlaceRequest;
 import com.example.semesterwork.places.service.PlaceService;
 import com.example.semesterwork.places.service.ReviewPlaceService;
-import com.example.semesterwork.util.GeneralResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,23 +38,33 @@ public class PlacesController {
             @RequestParam("pageSize") Integer pageSize,
             @RequestParam("pageNumber") Integer pageNumber
     ) {
-        return ResponseEntity.ok(placeService.findByQuery(query, pageNumber-1, pageSize));
+        return ResponseEntity.ok(placeService.findByQuery(query, pageNumber - 1, pageSize));
     }
 
     @RequestMapping(value = "sendReview", method = RequestMethod.POST)
-    public ResponseEntity<GeneralResponse> createPlaceReview(@RequestBody ReviewPlaceRequest reviewPlaceRequest,
-    @RequestHeader("Authorization") String token) {
+    public ResponseEntity<ReviewPlaceDto> createPlaceReview(@RequestBody ReviewPlaceRequest reviewPlaceRequest,
+                                                            @RequestHeader("Authorization") String token) {
         HttpStatus status;
+        ReviewPlaceDto responseBody = null;
         try {
-            reviewPlaceService.createPlaceReview(reviewPlaceRequest, token);
+            responseBody = reviewPlaceService.createPlaceReview(reviewPlaceRequest, token);
             status = HttpStatus.CREATED;
         } catch (Exception e) {
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
-        GeneralResponse responseBody = GeneralResponse.builder()
-                .code(status.value())
-                .message(status.getReasonPhrase())
-                .build();
+        return ResponseEntity.status(status).body(responseBody);
+    }
+
+    @GetMapping("/getAllReviews")
+    public ResponseEntity<List<ReviewPlaceDto>> getAllReviews(@RequestParam("placeId") Long placeId) {
+        HttpStatus status;
+        List<ReviewPlaceDto> responseBody = null;
+        try {
+            responseBody = reviewPlaceService.getAllReviews(placeId);
+            status = HttpStatus.OK;
+        } catch (Exception e) {
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
         return ResponseEntity.status(status).body(responseBody);
     }
 

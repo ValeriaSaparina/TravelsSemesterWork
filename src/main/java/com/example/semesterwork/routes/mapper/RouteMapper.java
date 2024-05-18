@@ -17,6 +17,7 @@ public class RouteMapper {
         return RouteDto.builder()
                 .id(entity.getId())
                 .name(entity.getName())
+                .description(entity.getDescription())
                 .places(entity.getPlaces().stream().map(placeMapper::toDto).collect(Collectors.toSet()))
                 .build();
     }
@@ -25,6 +26,7 @@ public class RouteMapper {
         return RouteModel.builder()
                 .name(request.getName())
                 .name(request.getName())
+                .description(request.getDescription())
                 .places(request.getPlaces())
                 .build();
     }

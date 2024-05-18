@@ -19,6 +19,7 @@ public class RouteModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
+    private String description;
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<PlaceModel> places;
 }

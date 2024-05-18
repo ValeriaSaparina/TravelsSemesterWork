@@ -21,7 +21,7 @@ public class ReviewPlaceMapper {
                 .id(entity.getId())
                 .text(entity.getText())
                 .rating(entity.getRating())
-                .place(placeMapper.toDto(entity.getPlace()))
+                .place(entity.getPlace().getId())
                 .user(userMapper.entityToDto(entity.getUser()))
                 .build();
     }
@@ -44,5 +44,4 @@ public class ReviewPlaceMapper {
                 .place(placeRepository.findById(request.getPlaceId()).orElseThrow())
                 .build();
     }
-
 }

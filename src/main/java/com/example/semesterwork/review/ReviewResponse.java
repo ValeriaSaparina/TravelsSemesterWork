@@ -1,20 +1,18 @@
-package com.example.semesterwork.places.dto;
+package com.example.semesterwork.review;
 
 import com.example.semesterwork.user.dto.UserDto;
+import com.example.semesterwork.user.model.UserModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Builder
-@Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class ReviewPlaceDto {
-    private Long id;
-    private String text;
+@NoArgsConstructor
+@Data
+public class ReviewResponse {
     private Float rating;
-    private Long place;
+    private String text;
     private UserDto user;
-
 }
