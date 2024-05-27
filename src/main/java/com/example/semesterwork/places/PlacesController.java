@@ -3,12 +3,12 @@ package com.example.semesterwork.places;
 
 import com.example.semesterwork.places.dto.PlaceDto;
 import com.example.semesterwork.places.dto.ReviewPlaceDto;
-import com.example.semesterwork.places.model.ReviewPlaceModel;
 import com.example.semesterwork.places.request.ReviewPlaceRequest;
 import com.example.semesterwork.places.service.PlaceService;
 import com.example.semesterwork.places.service.ReviewPlaceService;
 import com.example.semesterwork.util.GeneralResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +17,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@Slf4j
 @RequestMapping("/api/v1/places")
 public class PlacesController {
 
@@ -51,6 +52,7 @@ public class PlacesController {
             responseBody = reviewPlaceService.createPlaceReview(reviewPlaceRequest, token);
             status = HttpStatus.CREATED;
         } catch (Exception e) {
+            log.error(e.getMessage());
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
         return ResponseEntity.status(status).body(responseBody);
@@ -64,6 +66,7 @@ public class PlacesController {
             responseBody = reviewPlaceService.getAllReviews(placeId);
             status = HttpStatus.OK;
         } catch (Exception e) {
+            log.error(e.getMessage());
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
         return ResponseEntity.status(status).body(responseBody);
@@ -77,6 +80,7 @@ public class PlacesController {
             placeService.addFavPlace(placeId, token);
             status = HttpStatus.CREATED;
         } catch (Exception e) {
+            log.error(e.getMessage());
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
         GeneralResponse responseBody = GeneralResponse.builder()

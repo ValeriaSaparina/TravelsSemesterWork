@@ -6,6 +6,7 @@ import com.example.semesterwork.routes.model.RouteRequest;
 import com.example.semesterwork.routes.service.RouteService;
 import com.example.semesterwork.util.GeneralResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,7 @@ import java.util.List;
 
 
 @RestController
+@Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/routes")
 public class RoutesController {
@@ -56,6 +58,7 @@ public class RoutesController {
             routeService.addFavRoute(routeId, token);
             status = HttpStatus.CREATED;
         } catch (Exception e) {
+            log.error(e.getMessage());
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
         GeneralResponse responseBody = GeneralResponse.builder()
@@ -72,6 +75,7 @@ public class RoutesController {
             routeService.createRoute(routeRequest);
             status = HttpStatus.CREATED;
         } catch (Exception e) {
+            log.error(e.getMessage());
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
         GeneralResponse responseBody = GeneralResponse.builder()
@@ -82,3 +86,4 @@ public class RoutesController {
     }
 
 }
+
