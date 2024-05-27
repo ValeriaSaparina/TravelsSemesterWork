@@ -28,13 +28,15 @@ public class SecurityConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req -> req
-                                .requestMatchers("/api/v1/auth/**").permitAll()
-                                .requestMatchers("/api/v1/demo").permitAll()
-                                .requestMatchers("/api/v1/places/**").permitAll()
-                                .requestMatchers("/api/v1/routes/**").permitAll()
-                                .requestMatchers("/api/v1/admin/**").hasAnyAuthority("ROLE_ADMIN")
-//                        .requestMatchers("/api/v1/demo").authenticated()
-
+                        .requestMatchers("/api/v1/auth/**").permitAll()
+                        .requestMatchers("/api/v1/demo").permitAll()
+                        .requestMatchers("/api/v1/**").permitAll()
+                        .requestMatchers("/api/v1/places/**").permitAll()
+                        .requestMatchers("/api/v1/routes/**").permitAll()
+                        .requestMatchers("/api/v1/admin/**").hasAnyAuthority("ROLE_ADMIN")
+                        .requestMatchers("/api/v1/swagger-ui/**").permitAll()
+                        .requestMatchers("/swagger-ui/**").permitAll()
+                        .requestMatchers("/v3/api-docs/**").permitAll()
                 )
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
