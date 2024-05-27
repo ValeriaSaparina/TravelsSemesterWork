@@ -49,10 +49,11 @@ public class RoutesController {
 
 
     @RequestMapping(value = "/addFavRoute", method = RequestMethod.POST)
-    public ResponseEntity<GeneralResponse> addFavRoute(@RequestBody Long routeId) {
+    public ResponseEntity<GeneralResponse> addFavRoute(@RequestBody Long routeId,
+                                                       @RequestHeader("Authorization") String token) {
         HttpStatus status;
         try {
-            routeService.addFavRoute(routeId);
+            routeService.addFavRoute(routeId, token);
             status = HttpStatus.CREATED;
         } catch (Exception e) {
             status = HttpStatus.INTERNAL_SERVER_ERROR;

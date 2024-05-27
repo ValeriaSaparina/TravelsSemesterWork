@@ -2,9 +2,13 @@ package com.example.semesterwork.routes.service;
 
 import com.example.semesterwork.routes.dto.RouteDto;
 import com.example.semesterwork.routes.mapper.RouteMapper;
+import com.example.semesterwork.routes.model.FavoriteRouteModel;
 import com.example.semesterwork.routes.model.RouteRequest;
+import com.example.semesterwork.routes.repository.FavoriteRoutesRepository;
 import com.example.semesterwork.routes.repository.RouteRepository;
+import com.example.semesterwork.token.TokenRepo;
 import lombok.RequiredArgsConstructor;
+import lombok.val;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.PageRequest;
@@ -19,6 +23,8 @@ public class RouteService {
 
     private static final Logger log = LoggerFactory.getLogger(RouteService.class);
     private final RouteRepository repository;
+    private final TokenRepo tokenRepo;
+    private final FavoriteRoutesRepository favoriteRepository;
     private final RouteMapper mapper;
 
     public RouteDto findById(Long id) {
@@ -39,8 +45,12 @@ public class RouteService {
         repository.save(mapper.toEntity(routeRequest));
     }
 
-    public void addFavRoute(Long routeId) {
-//        repository.
+    public void addFavRoute(Long routeId, String token) {
+        val user = tokenRepo.findByToken(token.split(" ")[1]).orElseThrow().getUser();
+        favoriteRepository.save(FavoriteRouteModel.builder()
+                .route(repository.getReferenceById(routeId))
+                .userId(user.getId())
+                .build());
     }
 
     public List<RouteDto> findByQuery(String query) {
