@@ -1,0 +1,23 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - SPRING_DATASOURCE_URL=jdbc:postgresql://0.0.0.0:5432/semesterworkoris
+        - SPRING_DATASOURCE_USERNAME=postgres
+        - SPRING_DATASOURCE_PASSWORD=20112003
+    volumes:
+      - ./application.yaml:/app/application.yaml
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+  db:
+    image: postgres:16.1
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 20112003
+      POSTGRES_DB: semesterworkoris
+    ports:
+      - "5432:5432"
