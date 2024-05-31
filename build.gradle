@@ -49,14 +49,3 @@ tasks.named('test') {
     useJUnitPlatform()
 }
 
-tasks.register("downloadLibs", Copy) {
-    into(project.layout.buildDirectory.dir("dependency"))
-    from {
-        configurations.matching {
-            it.canBeResolved && it.name == "runtimeClasspath"
-        }.collect {
-            it.resolve()
-        }.flatten().unique()
-    }
-}
-

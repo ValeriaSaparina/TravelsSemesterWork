@@ -9,8 +9,6 @@ import com.example.semesterwork.routes.repository.RouteRepository;
 import com.example.semesterwork.token.TokenRepo;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +19,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class RouteService {
 
-    private static final Logger log = LoggerFactory.getLogger(RouteService.class);
     private final RouteRepository repository;
     private final TokenRepo tokenRepo;
     private final FavoriteRoutesRepository favoriteRepository;
@@ -32,7 +29,6 @@ public class RouteService {
     }
 
     public List<RouteDto> findAll() {
-        log.info(String.valueOf(repository.findAll()));
         return repository.findAll().stream().map(mapper::toDto).collect(Collectors.toList());
     }
 
