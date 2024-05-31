@@ -25,18 +25,15 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        String[] permitForUser = new String[]{"/api/v1/admin/**"};
+        String[] permitForAdmin = new String[]{"/api/v1/places/**", "/api/v1/routes/**"};
+        String[] permitAll = new String[]{"/v3/api-docs/**", "/swagger-ui/**", "/api/v1/swagger-ui/**", "/api/v1/auth/**"};
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req -> req
-                        .requestMatchers("/api/v1/auth/**").permitAll()
-                        .requestMatchers("/api/v1/demo").permitAll()
-                        .requestMatchers("/api/v1/**").permitAll()
-                        .requestMatchers("/api/v1/places/**").permitAll()
-                        .requestMatchers("/api/v1/routes/**").permitAll()
-                        .requestMatchers("/api/v1/admin/**").hasAnyAuthority("ROLE_ADMIN")
-                        .requestMatchers("/api/v1/swagger-ui/**").permitAll()
-                        .requestMatchers("/swagger-ui/**").permitAll()
-                        .requestMatchers("/v3/api-docs/**").permitAll()
+                        .requestMatchers(permitAll).permitAll()
+                        .requestMatchers(permitForUser).hasAnyAuthority("ROLE_USER")
+                        .requestMatchers(permitForAdmin).hasAnyAuthority("ROLE_ADMIN")
                 )
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
